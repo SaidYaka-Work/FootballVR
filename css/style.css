@@ -1,0 +1,150 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.a-enter-vr {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* Loading indicator styles */
+.a-loader-title {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Object Creation UI */
+#ui-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+#creation-panel {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#object-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 240px;
+  margin-right: 10px;
+}
+
+#create-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#create-button:hover {
+  background-color: #45a049;
+}
+
+/* AI Model Toggle Switch */
+.ai-toggle {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ai-toggle input {
+  margin-right: 6px;
+}
+
+.ai-toggle span {
+  color: #444;
+  font-weight: 500;
+}
+
+/* AI Model Generation Status */
+#ai-status {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Loading spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* AI-generated model container */
+.ai-model-container {
+  position: relative;
+}
+
+.ai-model-badge {
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+  background-color: #673AB7;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 1;
+}
+
+/* For mobile screens */
+@media (max-width: 600px) {
+  #creation-panel {
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  #object-input {
+    width: 90%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .ai-toggle {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+} 

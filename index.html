@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>VR Football Match</title>
+    <meta name="description" content="A virtual reality football environment">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <a-scene>
+      <!-- Environment (Stadium) -->
+      <a-entity environment="preset: tron; groundColor: #267F00; groundTexture: squares; playArea: 30"></a-entity>
+      
+      <!-- Camera and Controls -->
+      <a-entity id="rig" position="0 1.6 8">
+        <a-camera look-controls wasd-controls>
+          <a-cursor color="#FFFFFF"></a-cursor>
+        </a-camera>
+      </a-entity>
+      
+      <!-- Football Field -->
+      <a-entity id="football-field">
+        <!-- Main field -->
+        <a-plane position="0 0.01 0" rotation="-90 0 0" width="30" height="50" color="#267F00">
+          <!-- Field markings -->
+          <a-plane position="0 0 0" rotation="0 0 0" width="0.2" height="50" color="#FFFFFF"></a-plane>
+          <a-plane position="0 0 0" rotation="0 0 90" width="0.2" height="30" color="#FFFFFF"></a-plane>
+          
+          <!-- Center circle -->
+          <a-ring position="0 0 0" rotation="0 0 0" radius-inner="2.95" radius-outer="3.05" color="#FFFFFF"></a-ring>
+          
+          <!-- Penalty areas -->
+          <a-plane position="0 -20 0" rotation="0 0 0" width="16.5" height="0.2" color="#FFFFFF"></a-plane>
+          <a-plane position="0 20 0" rotation="0 0 0" width="16.5" height="0.2" color="#FFFFFF"></a-plane>
+          <a-plane position="-8.25 -15 0" rotation="0 0 90" width="10" height="0.2" color="#FFFFFF"></a-plane>
+          <a-plane position="8.25 -15 0" rotation="0 0 90" width="10" height="0.2" color="#FFFFFF"></a-plane>
+          <a-plane position="-8.25 15 0" rotation="0 0 90" width="10" height="0.2" color="#FFFFFF"></a-plane>
+          <a-plane position="8.25 15 0" rotation="0 0 90" width="10" height="0.2" color="#FFFFFF"></a-plane>
+          
+          <!-- Goal areas -->
+          <a-plane position="0 -23 0" rotation="0 0 0" width="5.5" height="0.2" color="#FFFFFF"></a-plane>
+          <a-plane position="0 23 0" rotation="0 0 0" width="5.5" height="0.2" color="#FFFFFF"></a-plane>
+          <a-plane position="-2.75 -20.5 0" rotation="0 0 90" width="5" height="0.2" color="#FFFFFF"></a-plane>
+          <a-plane position="2.75 -20.5 0" rotation="0 0 90" width="5" height="0.2" color="#FFFFFF"></a-plane>
+          <a-plane position="-2.75 20.5 0" rotation="0 0 90" width="5" height="0.2" color="#FFFFFF"></a-plane>
+          <a-plane position="2.75 20.5 0" rotation="0 0 90" width="5" height="0.2" color="#FFFFFF"></a-plane>
+        </a-plane>
+      </a-entity>
+      
+      <!-- Goals -->
+      <a-entity id="goals">
+        <!-- Goal 1 -->
+        <a-entity position="0 1 -25">
+          <a-box position="-3.5 0 0" width="0.1" height="2" depth="0.1" color="#FFFFFF"></a-box>
+          <a-box position="3.5 0 0" width="0.1" height="2" depth="0.1" color="#FFFFFF"></a-box>
+          <a-box position="0 1 0" width="7.1" height="0.1" depth="0.1" color="#FFFFFF"></a-box>
+          <a-box position="-3.5 1 1" width="0.1" height="0.1" depth="2" color="#FFFFFF"></a-box>
+          <a-box position="3.5 1 1" width="0.1" height="0.1" depth="2" color="#FFFFFF"></a-box>
+          <a-box position="0 1 2" width="7.1" height="0.1" depth="0.1" color="#FFFFFF"></a-box>
+          <!-- Net effect -->
+          <a-plane position="0 0.5 1" rotation="-90 0 0" width="7" height="2" color="#FFFFFF" opacity="0.3"></a-plane>
+        </a-entity>
+        
+        <!-- Goal 2 -->
+        <a-entity position="0 1 25">
+          <a-box position="-3.5 0 0" width="0.1" height="2" depth="0.1" color="#FFFFFF"></a-box>
+          <a-box position="3.5 0 0" width="0.1" height="2" depth="0.1" color="#FFFFFF"></a-box>
+          <a-box position="0 1 0" width="7.1" height="0.1" depth="0.1" color="#FFFFFF"></a-box>
+          <a-box position="-3.5 1 -1" width="0.1" height="0.1" depth="2" color="#FFFFFF"></a-box>
+          <a-box position="3.5 1 -1" width="0.1" height="0.1" depth="2" color="#FFFFFF"></a-box>
+          <a-box position="0 1 -2" width="7.1" height="0.1" depth="0.1" color="#FFFFFF"></a-box>
+          <!-- Net effect -->
+          <a-plane position="0 0.5 -1" rotation="-90 0 0" width="7" height="2" color="#FFFFFF" opacity="0.3"></a-plane>
+        </a-entity>
+      </a-entity>
+      
+      <!-- Football (ball) -->
+      <a-sphere id="football" position="0 1.2 6" radius="0.22" color="#FFFFFF" dynamic-body="mass: 1; linearDamping: 0.5">
+        <a-entity geometry="primitive: icosahedron; radius: 0.22" position="0 0 0" material="color: #000000; wireframe: true; wireframeLinewidth: 2"></a-entity>
+      </a-sphere>
+      
+      <!-- Instructions -->
+      <a-entity position="0 3 0" text="value: Walk into the ball to kick it! Ball is positioned at your height. Use WASD to move.; align: center; width: 5; color: white"></a-entity>
+      
+      <!-- Players -->
+      <a-entity id="team-1" position="-10 0 0">
+        <!-- Team 1 players will be added via JavaScript -->
+      </a-entity>
+      
+      <a-entity id="team-2" position="10 0 0">
+        <!-- Team 2 players will be added via JavaScript -->
+      </a-entity>
+      
+      <!-- Game Controls -->
+      <a-entity id="game-controls" position="0 0.5 5">
+        <a-entity id="reset-ball" position="0 2 0" 
+                  geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.1" 
+                  material="color: #FF0000"
+                  text="value: Reset Ball; align: center; width: 2; color: white"
+                  class="interactive"></a-entity>
+      </a-entity>
+      
+      <!-- Asset Management System -->
+      <a-assets timeout="10000">
+        <!-- Textures -->
+        <img id="jersey-team1" src="https://cdn.glitch.global/3294c4a3-a3d8-412f-9155-865b04233019/red.jpg?v=1620141179453" crossorigin="anonymous">
+        <img id="jersey-team2" src="https://cdn.glitch.global/3294c4a3-a3d8-412f-9155-865b04233019/blue.jpg?v=1620141179453" crossorigin="anonymous">
+        <img id="football-texture" src="https://cdn.glitch.global/3294c4a3-a3d8-412f-9155-865b04233019/football.jpg?v=1620141179453" crossorigin="anonymous">
+      </a-assets>
+    </a-scene>
+  </body>
+</html> 
